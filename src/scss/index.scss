@@ -1,0 +1,13 @@
+body {
+  background: #f3f7fa;
+  box-sizing: border-box;
+}
+
+@import '../../node_modules/normalize.css/normalize.css';
+
+@import './components/app.scss';
+@import './components/filters.scss';
+@import './components/tabs.scss';
+@import './components/tiket.scss';
+
+

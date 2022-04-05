@@ -1,0 +1,19 @@
+.App {
+  max-width: 754px;
+  margin: 0 auto;
+}
+.logo {
+  padding-top: 50px;
+  text-align: center;
+}
+.main-wrapper {
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+}
+.left-wrapper {
+  max-width: 232px;
+}
+.right-wrapper {
+  max-width: 502px;
+}

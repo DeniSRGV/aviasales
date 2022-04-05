@@ -1,0 +1,61 @@
+.tiket {
+    &-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    width: 502px;
+    height: 184px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+    box-sizing:border-box;
+    }
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 37px;
+        margin-bottom: 20px;
+    }
+    &-block {
+        width: 153px;
+        height: 41px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items:flex-start;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: #4A4A4A;
+    }
+}
+.price {
+    font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 24px;
+color: #2196F3;
+
+}
+.photo {
+    max-width: 110px ;
+    max-height: 37px;
+    img {
+        object-fit: contain;
+    }
+}
+.subtitle {
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 17px;
+text-transform: uppercase;
+color: #A0B0B9
+}
