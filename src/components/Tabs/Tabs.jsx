@@ -1,9 +1,22 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { setTabs } from '../../redux/actions/tabs'
+
 const Tabs = () => {
+  const dispatch = useDispatch()
+  const { tabs } = useSelector(({ state }) => state)
   return (
     <div className="tabs">
-      <div className="tab active">САМЫЙ ДЕШЕВЫЙ</div>
-      <div className="tab">САМЫЙ ДЕШЕВЫЙ</div>
+      {tabs.map((tab) => (
+        <div
+          className={tab.isActive ? ' tab active' : 'tab'}
+          key={tab.id}
+          onClick={() => dispatch(setTabs(tab, tabs))}
+        >
+          {tab.text}
+        </div>
+      ))}
     </div>
   )
 }

@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { getData } from '../redux/actions/tickets'
 
 import Filter from './Filters/Filters'
 import logo from './Logo.svg'
 import Tabs from './Tabs/Tabs'
-import Tiket from './Tiket/Tiket'
+import TicketContent from './Ticket/Ticket'
 
 const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getData())
+  }, [dispatch])
+
+  const state = useSelector(({ state }) => state)
+  const { filters } = state
   return (
     <div className="App">
       <div className="logo">
@@ -13,11 +23,11 @@ const App = () => {
       </div>
       <div className="main-wrapper">
         <div className="left-wrapper">
-          <Filter />
+          <Filter filters={filters} />
         </div>
         <div className="right-wrapper">
           <Tabs />
-          <Tiket />
+          <TicketContent state={state} />
         </div>
       </div>
     </div>
