@@ -29,6 +29,7 @@ export const getData = () => async (dispatch) => {
 
 export const setTicketsData = (items) => ({
   type: 'SET_TICKETS_DATA',
+
   payload: items
 })
 
