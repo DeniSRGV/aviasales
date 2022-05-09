@@ -1,6 +1,6 @@
 const initialState = {
   dataTickets: [],
-  isLoaded: false,
+  isLoaded: true,
   isError: false,
   slices: 5,
   filters: [
@@ -29,8 +29,7 @@ const state = (state = initialState, action) => {
     case 'SET_TICKETS_DATA':
       return {
         ...state,
-        dataTickets: action.payload,
-        isLoaded: true
+        dataTickets: action.payload
       }
 
     case 'SET_LOADED':

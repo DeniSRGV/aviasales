@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getData } from '../redux/actions/tickets'
+import { setLoaded, setTicketsData } from '../redux/actions/tickets'
+import ApiService from '../service/ApiService'
 
 import Filter from './Filters/Filters'
 import logo from './Logo.svg'
@@ -9,9 +10,16 @@ import Tabs from './Tabs/Tabs'
 import TicketContent from './Ticket/Ticket'
 
 const App = () => {
+  const apiService = new ApiService()
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getData())
+    apiService
+      .getSearchId()
+      .then((id) => apiService.getTickets(id))
+      .then((tickets) => {
+        dispatch(setTicketsData(tickets))
+        dispatch(setLoaded(false))
+      })
   }, [dispatch])
 
   const state = useSelector(({ state }) => state)

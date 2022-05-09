@@ -17,7 +17,7 @@ const Ticket = ({ dataTickets, isLoaded, slices }) => {
   const dispatch = useDispatch()
   return (
     <>
-      {isLoaded ? (
+      {!isLoaded ? (
         dataTickets.slice(0, slices).map((item) => {
           return (
             <div className="ticket-wrapper" key={uuidv4()}>

@@ -1,31 +1,24 @@
 export const setFilter = (item, filters) => (dispatch) => {
+  // const ALL = AllArr.every((el) => el.isChecked === item.isChecked)
+
   let updatedFilters
+  let i = !item.isChecked
 
   if (item.id === 1) {
-    let value = !item.isChecked
-    updatedFilters = filters.map((e) => {
-      e.isChecked = value
-
-      return e
+    updatedFilters = filters.map((el) => {
+      el.isChecked = i
+      return el
     })
   } else {
-    updatedFilters = filters.map((e) => {
-      if (e.id === 1) {
-        e.isChecked = false
+    updatedFilters = filters.map((el) => {
+      if (el.id === 1) {
+        el.isChecked = false
       }
-      if (item.id === e.id) {
-        e.isChecked = !e.isChecked
+      if (item.id === el.id) {
+        el.isChecked = !el.isChecked
       }
 
-      return e
-    })
-  }
-  if (filters.slice(1).every((el) => el.isChecked === true)) {
-    updatedFilters = filters.map((e) => {
-      if (e.id === 1) {
-        e.isChecked = !e.isChecked
-      }
-      return e
+      return el
     })
   }
 
