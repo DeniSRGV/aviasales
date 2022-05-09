@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
-import { setFilter } from '../../redux/actions/filters'
+import { setFilterValue, handleCheckFilter } from '../../redux/actions/filters'
 
 const Filter = ({ filters }) => {
   const dispatch = useDispatch()
+  useEffect(() => {
+    if (!filters[0].isChecked) {
+      if (filters.slice(1).filter((elem) => !elem.isChecked).length === 0) {
+        dispatch(setFilterValue(1))
+      }
+    }
+  }, [filters, dispatch])
 
   return (
     <div className="filter-block">
@@ -16,7 +23,7 @@ const Filter = ({ filters }) => {
             <label
               className="checkbox"
               key={uuidv4()}
-              onChange={() => dispatch(setFilter(item, filters))}
+              onChange={() => dispatch(handleCheckFilter(item.id, filters))}
             >
               <li>
                 <input

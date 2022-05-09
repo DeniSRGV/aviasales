@@ -1,34 +1,34 @@
-export const setFilter = (item, filters) => (dispatch) => {
-  // const ALL = AllArr.every((el) => el.isChecked === item.isChecked)
-
-  let updatedFilters
-  let i = !item.isChecked
-
-  if (item.id === 1) {
-    updatedFilters = filters.map((el) => {
-      el.isChecked = i
-      return el
-    })
+export const handleCheckFilter = (id, filters) => async (dispatch) => {
+  if (filters[0].isChecked) {
+    switch (id) {
+      case 1:
+        dispatch(removeFilters())
+        return
+      default:
+        dispatch(setFilterValue(id))
+        dispatch(setFilterValue(1))
+    }
   } else {
-    updatedFilters = filters.map((el) => {
-      if (el.id === 1) {
-        el.isChecked = false
-      }
-      if (item.id === el.id) {
-        el.isChecked = !el.isChecked
-      }
-
-      return el
-    })
+    switch (id) {
+      case 1:
+        dispatch(setAllFilterValues())
+        return
+      default:
+        dispatch(setFilterValue(id))
+    }
   }
-
-  dispatch(setTabsState(updatedFilters))
 }
-
-export const setTabsState = (updatedFilters) => ({
-  type: 'SET_FILTERS',
-  payload: updatedFilters
+export const setFilterValue = (id) => ({
+  type: 'SET_FILTER',
+  payload: id
 })
+export const removeFilters = () => ({
+  type: 'REMOVE_FILTERS'
+})
+export const setAllFilterValues = () => ({
+  type: 'SET_ALL_FILTER'
+})
+
 export const showTickets = (slices) => ({
   type: 'SET_SLICES',
   payload: slices + 5
