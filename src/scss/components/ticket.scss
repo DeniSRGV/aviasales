@@ -73,3 +73,23 @@
   text-transform: uppercase;
   color: #a0b0b9;
 }
+.progress-bar-stripes {
+  animation: progress-bar-stripes 1s linear infinite !important;
+  // position: relative !important;
+  background-image: linear-gradient(
+    45deg,
+    hsla(0, 4%, 78%, 0.15) 25%,
+    transparent 0,
+    transparent 50%,
+    hsla(0, 0%, 100%, 0.15) 0,
+    hsla(0, 0%, 100%, 0.15) 75%,
+    transparent 0,
+    transparent
+  ) !important;
+  background-size: 1rem 1rem !important;
+}
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 1rem;
+  }
+}

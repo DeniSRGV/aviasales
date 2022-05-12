@@ -29,13 +29,18 @@ const state = (state = initialState, action) => {
     case 'SET_TICKETS_DATA':
       return {
         ...state,
-        dataTickets: action.payload
+        dataTickets: [...state.dataTickets, ...action.payload]
       }
 
     case 'SET_LOADED':
       return {
         ...state,
         isLoaded: action.payload
+      }
+    case 'SET_ERROR':
+      return {
+        ...state,
+        isError: action.payload
       }
 
     case 'SET_SORTING_TABS':

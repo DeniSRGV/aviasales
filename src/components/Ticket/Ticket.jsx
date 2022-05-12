@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch } from 'react-redux'
+import LoadingBar from 'react-top-loading-bar'
 
-import Spinner from '../Spinner/Spinner'
 import {
   changeStopsDeclension,
   timeToTrip,
@@ -13,11 +13,24 @@ import {
 } from '../../utils/utils'
 import { showTickets } from '../../redux/actions/filters'
 
-const Ticket = ({ dataTickets, isLoaded, slices }) => {
+const Ticket = ({ dataTickets, slices, isLoaded }) => {
   const dispatch = useDispatch()
+
   return (
     <>
-      {dataTickets.slice(0, slices).map((item) => {
+      {isLoaded ? (
+        <LoadingBar
+          progress={100}
+          waitingTime={20000}
+          loaderSpeed={7000}
+          height={7}
+          shadow={false}
+          color="rgba(0, 0, 255, 0.8)"
+          containerStyle={{ position: 'relative' }}
+          className="progress-bar-stripes"
+        />
+      ) : null}
+      {dataTickets?.slice(0, slices).map((item) => {
         return (
           <div className="ticket-wrapper" key={uuidv4()}>
             <div className="ticket-header">
