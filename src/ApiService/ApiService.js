@@ -1,5 +1,5 @@
 class ApiService {
-  // _apiBase = 'https://front-test.beta.aviasales.ru/' // out of service
+  // _apiBase = 'https://front-test.beta.aviasales.ru/'
   _apiBase = 'https://aviasales-test-api.kata.academy/'
 
   async getSearchId() {
@@ -16,11 +16,10 @@ class ApiService {
   async getTickets(searchId, oldTickets = []) {
     const response = await fetch(`${this._apiBase}tickets?searchId=${searchId}`)
 
-    if (!response.ok && response.status === 500) {
+    if (!response.ok) {
       return this.getTickets(searchId, oldTickets)
     }
     const resData = await response.json()
-    // console.log(resData);
     const ticketsArr = [...oldTickets, ...resData.tickets]
 
     if (!resData.stop) {

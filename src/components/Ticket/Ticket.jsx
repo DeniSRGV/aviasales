@@ -10,52 +10,48 @@ import {
   getSortedTickets,
   getFilteredTickets,
   getPrettyPrice
-} from '../../utils'
+} from '../../utils/utils'
 import { showTickets } from '../../redux/actions/filters'
 
 const Ticket = ({ dataTickets, isLoaded, slices }) => {
   const dispatch = useDispatch()
   return (
     <>
-      {!isLoaded ? (
-        dataTickets.slice(0, slices).map((item) => {
-          return (
-            <div className="ticket-wrapper" key={uuidv4()}>
-              <div className="ticket-header">
-                <div className="price">{getPrettyPrice(item.price)}</div>
-                <div className="photo">
-                  <img
-                    src={`https://pics.avs.io/99/36/${item.carrier}.png`}
-                    alt="avia-logo"
-                  />
+      {dataTickets.slice(0, slices).map((item) => {
+        return (
+          <div className="ticket-wrapper" key={uuidv4()}>
+            <div className="ticket-header">
+              <div className="price">{getPrettyPrice(item.price)}</div>
+              <div className="photo">
+                <img
+                  src={`https://pics.avs.io/99/36/${item.carrier}.png`}
+                  alt="avia-logo"
+                />
+              </div>
+            </div>
+            {item.segments.map((elem) => (
+              <div className="ticket-info" key={uuidv4()}>
+                <div className="ticket-block">
+                  <span className="subtitle">
+                    {elem.origin} - {elem.destination}
+                  </span>
+                  {timeToTrip(elem.date, elem.duration)}
+                </div>
+                <div className="ticket-block">
+                  <span className="subtitle">В пути</span>
+                  {duration(elem.duration)}
+                </div>
+                <div className="ticket-block">
+                  <span className="subtitle">
+                    {changeStopsDeclension(elem.stops)}
+                  </span>
+                  {elem.stops.join(', ')}
                 </div>
               </div>
-              {item.segments.map((elem) => (
-                <div className="ticket-info" key={uuidv4()}>
-                  <div className="ticket-block">
-                    <span className="subtitle">
-                      {elem.origin} - {elem.destination}
-                    </span>
-                    {timeToTrip(elem.date, elem.duration)}
-                  </div>
-                  <div className="ticket-block">
-                    <span className="subtitle">В пути</span>
-                    {duration(elem.duration)}
-                  </div>
-                  <div className="ticket-block">
-                    <span className="subtitle">
-                      {changeStopsDeclension(elem.stops)}
-                    </span>
-                    {elem.stops.join(', ')}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )
-        })
-      ) : (
-        <Spinner />
-      )}
+            ))}
+          </div>
+        )
+      })}
       <div
         className="tab active ticket-show-btn"
         onClick={() => dispatch(showTickets(slices))}

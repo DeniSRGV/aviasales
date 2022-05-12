@@ -1,11 +1,13 @@
 export const setTabs = (item, tabsState) => async (dispatch) => {
   const updateTabs = tabsState.map((tab) => {
-    if (item.id === tab.id) {
-      tab.isActive = true
-      return tab
+    switch (tab.id) {
+      case item.id:
+        tab.isActive = true
+        return tab
+      default:
+        tab.isActive = false
+        return tab
     }
-    tab.isActive = false
-    return tab
   })
   dispatch(setTabsState(updateTabs))
 }

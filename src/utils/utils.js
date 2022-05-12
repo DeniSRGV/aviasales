@@ -10,40 +10,13 @@ export function changeStopsDeclension(stops) {
   }
 }
 export function getPrettyPrice(price) {
-  // I вариант
   return `${price.toLocaleString('ru-RU', {
     style: 'decimal',
     currency: 'RUB'
   })} Р`
-
-  //II вариант
-  //   return price
-  //     .toString()
-  //     .split('')
-  //     .reverse()
-  //     .reduce((acc, char, i) => {
-  //       if (i % 3 === 0) {
-  //         return acc + ' ' + char
-  //       }
-  //       return acc + char
-  //     }, 'р ')
-  //     .split('')
-  //     .reverse()
-  //     .join('')
 }
 
 export function timeToTrip(date, second) {
-  //   let dateOut = new Date(date)
-  //   const outHours = dateOut.getHours()
-  //   const outMinutes = dateOut.getMinutes()
-  //   const inHours = new Date(
-  //     dateOut.setHours(dateOut.getHours() + Math.ceil(time / 60))
-  //   ).getHours()
-  //   const inMinutes = new Date(
-  //     dateOut.setMinutes(dateOut.getMinutes() + time)
-  //   ).getMinutes()
-  //   return `${outHours}:${outMinutes} - ${inHours}:${inMinutes}`
-
   var result = add(new Date(date), {
     seconds: second
   })
@@ -53,10 +26,8 @@ export function timeToTrip(date, second) {
     'HH:mm'
   )}`
 }
-// duration
 
 export function duration(seconds) {
-  //   return Math.ceil(duration / 60) + 'ч ' + (duration % 60) + 'м'
   const hours = (seconds / 3600) ^ 0
   const minutes = ((seconds - hours * 3600) / 60) ^ 0
 
@@ -71,7 +42,6 @@ export function duration(seconds) {
 
 // filterTickets
 
-// функция сортировки билетов по цене от меньшего к большему
 function sortByPrice(a, b) {
   const priceA = a.price
   const priceB = b.price
@@ -82,13 +52,7 @@ function sortByPrice(a, b) {
   return -1
 }
 
-// функция сортировки билетов по времени полета от меньшего к большему
-
 function sortByTime(a, b) {
-  // I вариант ( для сортировки по одному направлениям билета (ТУДА)
-  //   return a.segments[0].duration - b.segments[0].duration
-
-  // II вариант ( для сортировки по двум направлениям билета (ТУДА - ОБРАТНО))
   let timeA = 0
   let timeB = 0
 
@@ -133,15 +97,15 @@ export function getFilteredTickets(appliedFilters, tickets) {
 }
 
 export function getSortedTickets(activeTabId, tickets) {
-  if (activeTabId === 1) {
-    const sortedTickets = tickets.sort(sortByPrice)
-    return sortedTickets
+  let sortedTickets
+  switch (activeTabId) {
+    case 1:
+      sortedTickets = tickets.sort(sortByPrice)
+      return sortedTickets
+    case 2:
+      sortedTickets = tickets.sort(sortByTime)
+      return sortedTickets
+    default:
+      break
   }
-
-  if (activeTabId === 2) {
-    const sortedTickets = tickets.sort(sortByTime)
-    return sortedTickets
-  }
-
-  return tickets
 }
